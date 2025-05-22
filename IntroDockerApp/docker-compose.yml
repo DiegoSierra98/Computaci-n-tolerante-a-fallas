@@ -1,0 +1,14 @@
+version: "3.8"
+services:
+  node-service:
+    build: ./node-service
+    container_name: node-service
+    expose:
+      - "3000"
+  nginx:
+    build: ./nginx
+    container_name: mi-web-app
+    ports:
+      - "9090:80"
+    depends_on:
+      - node-service
