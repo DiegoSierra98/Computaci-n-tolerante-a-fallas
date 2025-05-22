@@ -1,0 +1,32 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: micro-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+  - host: micro.final.local
+    http:
+      paths:
+      - path: /auth(/|$)(.*)
+        pathType: Prefix
+        backend:
+          service:
+            name: auth-service
+            port:
+              number: 3000
+      - path: /catalog(/|$)(.*)
+        pathType: Prefix
+        backend:
+          service:
+            name: catalog-service
+            port:
+              number: 3000
+      - path: /orders(/|$)(.*)
+        pathType: Prefix
+        backend:
+          service:
+            name: order-service
+            port:
+              number: 3000
